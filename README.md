@@ -22,7 +22,7 @@ FearFactor, Unity oyun motoru ve C# kullanılarak geliştirilen, keşif ve atmos
 
 ## 🛠️ Kullanılan Teknolojiler
 
--   **Oyun Motoru:** Unity 6000.2.4f1
+-   **Oyun Motoru:** Unity 6
 -   **Programlama Dili:** C#
 -   **Versiyon Kontrol:** Git & GitHub
 -   **Modelleme:** Blender (Temel varlıklar için)
