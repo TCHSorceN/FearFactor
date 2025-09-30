@@ -1,6 +1,6 @@
 # FearFactor - 3D Korku Oyunu Projesi
 
-![Oyun İçi Ekran Görüntüsü](<img width="1234" height="694" alt="Ekran görüntüsü 2025-09-30 183511" src="https://github.com/user-attachments/assets/acab8540-0ff5-4882-b75d-5a9605477f88" />)
+![Oyun İçi Ekran Görüntüsü](https://github.com/user-attachments/assets/acab8540-0ff5-4882-b75d-5a9605477f88)
 
 ## 📖 Hakkında
 
