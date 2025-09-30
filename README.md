@@ -1,5 +1,7 @@
 # FearFactor - 3D Korku Oyunu Projesi
 
+[Oyun İçi Ekran Görüntüsü]("https://github.com/user-attachments/assets/79e101f8-f7de-4e19-b3a0-f2ab4f69abdf")
+
 ## 📖 Hakkında
 
 FearFactor, Unity oyun motoru ve C# kullanılarak geliştirilen, keşif ve atmosfer odaklı birinci şahıs (first-person) bir korku oyunudur. Bu proje, oynanış programlama ve sistem tasarımı yeteneklerimi sergilemek amacıyla tek başıma yürüttüğüm bir tutku projesidir.
