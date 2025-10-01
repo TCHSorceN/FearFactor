@@ -2,39 +2,52 @@ using UnityEngine;
 
 public class GhostWritingBook : MonoBehaviour
 {
-    // Inspector'dan, defterin üzerine koyduğumuz karalama objesini buraya sürükleyeceğiz.
     public GameObject karalamaObjesi;
-    
-    // Hayalet bölgeye girdiğinde yazı yazma ihtimali (yüzde olarak, 0-100 arası).
     public float yazmaIhtimali = 25f;
 
+    // YENİ: Hayaletin ne kadar yaklaşması gerektiğini buradan ayarlayacağız.
+    public float tetiklenmeMesafesi = 2.0f; 
+
     private bool yaziYazildiMi = false;
+    private Transform hayaletTransform; // YENİ: Hayaletin pozisyonunu saklamak için.
 
     void Start()
     {
-        // Oyun başladığında karalamaların görünmez olduğundan emin ol.
         if (karalamaObjesi != null)
         {
             karalamaObjesi.SetActive(false);
         }
+
+        // YENİ: Oyun başladığında "Hayalet" etiketli objeyi bul ve hafızaya al.
+        GameObject hayaletObjesi = GameObject.FindGameObjectWithTag("Hayalet");
+        if (hayaletObjesi != null)
+        {
+            hayaletTransform = hayaletObjesi.transform;
+        }
+        else
+        {
+            Debug.LogError("HATA: Sahnede 'Hayalet' etiketli bir obje bulunamadı!");
+        }
     }
 
-    // Hayalet, defterin etrafındaki trigger alanına girdiğinde bu fonksiyon çalışır.
-    private void OnTriggerEnter(Collider other)
+    // YENİ: OnTriggerEnter yerine artık Update kullanıyoruz.
+    void Update()
     {
-        // Eğer yazı zaten yazılmadıysa VE içeri giren hayaletse...
-        if (!yaziYazildiMi && other.CompareTag("Hayalet")) // Hayaletin Tag'i "Hayalet" olmalı!
+        // Eğer yazı zaten yazılmadıysa VE hayaleti bulduysak...
+        if (!yaziYazildiMi && hayaletTransform != null)
         {
-            Debug.Log("Hayalet defterin yanina geldi, yazma ihtimali kontrol ediliyor...");
+            // Defter ile hayalet arasındaki mesafeyi her frame hesapla.
+            float mesafe = Vector3.Distance(transform.position, hayaletTransform.position);
 
-            // Rastgele bir sayı üret (0 ile 100 arasında).
-            float rastgeleSayi = Random.Range(0f, 100f);
-
-            // Eğer bu sayı, belirlediğimiz ihtimalden küçükse...
-            if (rastgeleSayi < yazmaIhtimali)
+            // Eğer mesafe, belirlediğimiz tetiklenme mesafesinden daha azsa...
+            if (mesafe < tetiklenmeMesafesi)
             {
-                // ...yazıyı yaz!
-                YaziYaz();
+                // ...yazı yazma ihtimalini kontrol et.
+                float rastgeleSayi = Random.Range(0f, 100f);
+                if (rastgeleSayi < yazmaIhtimali)
+                {
+                    YaziYaz();
+                }
             }
         }
     }
@@ -42,16 +55,11 @@ public class GhostWritingBook : MonoBehaviour
     void YaziYaz()
     {
         Debug.Log("KANIT BULUNDU: Hayalet Yazısı!");
-        yaziYazildiMi = true; // Tekrar yazılmasını engelle.
-
-        FindFirstObjectByType<GameManager>().KanitBulundu_Yazi();
-
-        // Karalama objesini görünür yap.
+        yaziYazildiMi = true; 
+        
         if (karalamaObjesi != null)
         {
             karalamaObjesi.SetActive(true);
         }
-        
-        // İleride buraya bir "kanıt bulundu" sesi ekleyebiliriz.
     }
 }

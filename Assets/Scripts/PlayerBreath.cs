@@ -8,11 +8,12 @@ public class PlayerBreath : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Girdiği alanın etiketi "SogukBolge" mi?
-        if (other.CompareTag("SogukBolge"))FindFirstObjectByType<GameManager>().KanitBulundu_Sicaklik();
-
-
+        if (other.CompareTag("SogukBolge"))
         {
-            // DEĞİŞTİ: Artık Play() komutunu kullanıyoruz. Bu, Burst'ü tetikler.
+            // GameManager'a sıcaklık kanıtının bulunduğunu haber ver.
+            FindFirstObjectByType<GameManager>().KanitBulundu_Sicaklik();
+
+            // Efekti oynat.
             Debug.Log("Soguk bir bolgeye girildi. Nefes efekti oynatiliyor.");
             nefesEfekti.Play(); 
         }
@@ -23,7 +24,7 @@ public class PlayerBreath : MonoBehaviour
         // Çıktığı alanın etiketi "SogukBolge" mi?
         if (other.CompareTag("SogukBolge"))
         {
-            // DEĞİŞTİ: Artık Stop() komutunu kullanıyoruz. Bu, efekti durdurur.
+            // Efekti durdur.
             Debug.Log("Soguk bolgeden cikildi. Nefes efekti durduruluyor.");
             nefesEfekti.Stop(); 
         }
